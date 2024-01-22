@@ -4,7 +4,7 @@ Welcome to our collection of Rust exercises, inspired by the challenges presente
 
 ## About the Exercises
 
-Each exercise in this repository is sourced from the Taller 1 FIUBA Rust guide. These exercises cover a range of topics and complexities, making them ideal for both beginners and experienced Rust programmers who wish to sharpen their skills.
+Each exercise in this repository is sourced from the Taller 1 FIUBA Rust guide. These exercises are introductory in nature, focusing on the fundamentals of the Rust programming language. They are designed to provide a solid foundation for those new to Rust, making them ideal for beginners or programmers transitioning from other languages who wish to get acquainted with Rust's unique features and syntax.
 
 ## Getting Started
 
