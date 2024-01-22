@@ -1,6 +1,6 @@
 # Rust Exercises - Taller 1 FIUBA
 
-Welcome to our collection of Rust exercises, inspired by the challenges presented in [Taller 1 FIUBA Rust](https://taller-1-fiuba-rust.github.io/guias/guia1.html). This repository is designed to help you improve your Rust programming skills through practical, hands-on exercises.
+Welcome to our collection of Rust exercises, inspired by the challenges presented in [Taller 1 FIUBA Rust](https://taller-1-fiuba-rust.github.io/guias/index.html). This repository is designed to help you improve your Rust programming skills through practical, hands-on exercises.
 
 ## About the Exercises
 
