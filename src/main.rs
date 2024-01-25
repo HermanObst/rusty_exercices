@@ -2,6 +2,9 @@ use std::fs::File;
 use std::io::Read;
 fn main() {
     println!("Hello, world!");
+    let test = "HolaBaby".to_string();
+    main_loop(test, 5);
+    println!("TERMINO");
 }
 
 fn read_file(file_path: &str) -> std::io::Result<String> {
@@ -18,6 +21,29 @@ fn process_file(string_file: String) -> Vec<String> {
     }
     words
 } 
+
+fn print_console_display(word: String, reconstructed_word: String) -> () {
+    todo!()
+}
+
+fn main_loop(word_vec: String, max_attempts: u8) -> () {
+    let mut attempts: u8 = 0;
+    
+    while attempts < max_attempts {
+        let mut letter = String::new();
+        std::io::stdin()
+            .read_line(&mut letter)
+            .expect("Error leyendo la linea."); 
+        letter.pop();
+        
+        if word_vec.contains(&letter) {
+            println!("DALEE");
+        } else {
+            attempts+= 1;
+        }
+    }
+    todo!()
+}
 
 #[test]
 fn test_file_reading() {
