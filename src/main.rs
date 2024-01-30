@@ -21,7 +21,7 @@ fn process_file(string_file: String) -> Vec<String> {
         words.push(word.to_string());
     }
     words
-} 
+}
 
 fn print_console_display(word: String, reconstructed_word: String) -> () {
     todo!()
@@ -49,18 +49,18 @@ fn fill_word_by_indices(mut filling_word: Vec<u8>, indices: Vec<usize>, letter: 
 fn main_loop(word_string: String, max_attempts: u8) -> () {
     let mut attempts: u8 = 0;
     let mut word: Vec<u8> = vec![0; word_string.len()];
-    
+
     while attempts < max_attempts {
         let mut letter = String::new();
         std::io::stdin()
             .read_line(&mut letter)
-            .expect("Error leyendo la linea."); 
+            .expect("Error leyendo la linea.");
         letter.pop();
-        
+
         if word_string.contains(&letter) {
             println!("DALEE");
         } else {
-            attempts+= 1;
+            attempts += 1;
         }
     }
     todo!()
@@ -88,6 +88,6 @@ fn test_letter_index() {
     let char0 = "x".to_string();
 
     assert_eq!([1].to_vec(), letter_index(word.clone(), char1));
-    assert_eq!([2,3].to_vec(), letter_index(word.clone(), char2));
+    assert_eq!([2, 3].to_vec(), letter_index(word.clone(), char2));
     assert_eq!(Vec::<usize>::new(), letter_index(word, char0));
 }
