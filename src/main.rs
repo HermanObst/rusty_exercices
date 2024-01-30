@@ -1,10 +1,10 @@
-use std::char;
-use std::fs::File;
+use std::fs::{read, File};
 use std::io::Read;
 fn main() {
-    println!("Hello, world!");
-    let test = "HolaBaby".to_string();
-    main_loop(test, 5);
+    let file_string = read_file("src/palabras.txt").unwrap();
+    let words = process_file(file_string);
+    let first_word = words.first().cloned().unwrap();
+    main_loop(first_word, 5);
     println!("TERMINO");
 }
 
@@ -23,9 +23,9 @@ fn process_file(string_file: String) -> Vec<String> {
     words
 }
 
-fn print_console_display(word: String, reconstructed_word: String) -> () {
-    todo!()
-}
+// fn print_console_display(word: String, reconstructed_word: String) -> () {
+//     todo!()
+// }
 
 fn letter_index(word_string: String, letter: String) -> Vec<usize> {
     let mut indices: Vec<usize> = Vec::new();
@@ -39,16 +39,16 @@ fn letter_index(word_string: String, letter: String) -> Vec<usize> {
     indices
 }
 
-fn fill_word_by_indices(mut filling_word: Vec<u8>, indices: Vec<usize>, letter: u8) -> Vec<u8> {
+fn fill_word_by_indices(filling_word: &mut Vec<u8>, indices: Vec<usize>, letter: String) {
+    let letter = letter.bytes().next().unwrap();
     for index in indices {
         filling_word[index] = letter
     }
-    filling_word
 }
 
-fn main_loop(word_string: String, max_attempts: u8) -> () {
+fn main_loop(word_string: String, max_attempts: u8) {
     let mut attempts: u8 = 0;
-    let mut word: Vec<u8> = vec![0; word_string.len()];
+    let mut filling_word: Vec<u8> = vec![0; word_string.len()];
 
     while attempts < max_attempts {
         let mut letter = String::new();
@@ -57,13 +57,15 @@ fn main_loop(word_string: String, max_attempts: u8) -> () {
             .expect("Error leyendo la linea.");
         letter.pop();
 
-        if word_string.contains(&letter) {
-            println!("DALEE");
-        } else {
+        let indices = letter_index(word_string.clone(), letter.clone());
+
+        if indices.is_empty() {
             attempts += 1;
+        } else {
+            fill_word_by_indices(&mut filling_word, indices, letter);
         }
+        println!("DATA! {:?}", filling_word);
     }
-    todo!()
 }
 
 #[test]
@@ -90,4 +92,17 @@ fn test_letter_index() {
     assert_eq!([1].to_vec(), letter_index(word.clone(), char1));
     assert_eq!([2, 3].to_vec(), letter_index(word.clone(), char2));
     assert_eq!(Vec::<usize>::new(), letter_index(word, char0));
+}
+
+#[test]
+fn test_fill_word_by_indices() {
+    let word_string = "Hello".to_string();
+    let mut filling_word: Vec<u8> = vec![0; word_string.len()];
+    let char_string = "l".to_string();
+    let indices = letter_index(word_string, char_string.clone());
+    let char_result = char_string.chars().next().unwrap() as u8;
+
+    fill_word_by_indices(&mut filling_word, indices, char_string);
+
+    assert_eq!(filling_word, [0, 0, char_result, char_result, 0].to_vec());
 }
