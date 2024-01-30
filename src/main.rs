@@ -39,6 +39,13 @@ fn letter_index(word_string: String, letter: String) -> Vec<usize> {
     indices
 }
 
+fn fill_word_by_indices(mut filling_word: Vec<u8>, indices: Vec<usize>, letter: u8) -> Vec<u8> {
+    for index in indices {
+        filling_word[index] = letter
+    }
+    filling_word
+}
+
 fn main_loop(word_string: String, max_attempts: u8) -> () {
     let mut attempts: u8 = 0;
     let mut word: Vec<u8> = vec![0; word_string.len()];
