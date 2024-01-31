@@ -27,7 +27,7 @@ fn process_file(string_file: String) -> Vec<String> {
 //     todo!()
 // }
 
-fn letter_index(word_string: String, letter: String) -> Vec<usize> {
+fn calculate_indexs_of_letter_appearances(word_string: String, letter: String) -> Vec<usize> {
     let mut indices: Vec<usize> = Vec::new();
     let char = letter.chars().next().unwrap();
 
@@ -55,9 +55,10 @@ fn main_loop(word_string: String, max_attempts: u8) {
         std::io::stdin()
             .read_line(&mut letter)
             .expect("Error leyendo la linea.");
+        // TODO: Assumes only 1 char ingresed. pop "end of line"
         letter.pop();
 
-        let indices = letter_index(word_string.clone(), letter.clone());
+        let indices = calculate_indexs_of_letter_appearances(word_string.clone(), letter.clone());
 
         if indices.is_empty() {
             attempts += 1;
@@ -71,27 +72,27 @@ fn main_loop(word_string: String, max_attempts: u8) {
 #[test]
 fn test_file_reading() {
     let result = read_file("src/palabras.txt").unwrap();
-    assert_eq!(result, "Hola\nComo\nestas?");
+    assert_eq!(result, "HolaMUNDO\nComo\nestas?");
 }
 
 #[test]
 fn test_process_file() {
     let file_string = read_file("src/palabras.txt").unwrap();
     let words = process_file(file_string);
-    let expected_output = vec!["Hola", "Como", "estas?"];
+    let expected_output = vec!["HolaMUNDO", "Como", "estas?"];
     assert_eq!(words, expected_output);
 }
 
 #[test]
-fn test_letter_index() {
+fn test_calculate_indexs_of_letter_appearances() {
     let word = "Hello".to_string();
     let char1 = "e".to_string();
     let char2 = "l".to_string();
     let char0 = "x".to_string();
 
-    assert_eq!([1].to_vec(), letter_index(word.clone(), char1));
-    assert_eq!([2, 3].to_vec(), letter_index(word.clone(), char2));
-    assert_eq!(Vec::<usize>::new(), letter_index(word, char0));
+    assert_eq!([1].to_vec(), calculate_indexs_of_letter_appearances(word.clone(), char1));
+    assert_eq!([2, 3].to_vec(), calculate_indexs_of_letter_appearances(word.clone(), char2));
+    assert_eq!(Vec::<usize>::new(), calculate_indexs_of_letter_appearances(word, char0));
 }
 
 #[test]
@@ -99,7 +100,7 @@ fn test_fill_word_by_indices() {
     let word_string = "Hello".to_string();
     let mut filling_word: Vec<u8> = vec![0; word_string.len()];
     let char_string = "l".to_string();
-    let indices = letter_index(word_string, char_string.clone());
+    let indices = calculate_indexs_of_letter_appearances(word_string, char_string.clone());
     let char_result = char_string.chars().next().unwrap() as u8;
 
     fill_word_by_indices(&mut filling_word, indices, char_string);
